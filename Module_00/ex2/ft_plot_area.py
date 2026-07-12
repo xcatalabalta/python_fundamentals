@@ -8,8 +8,8 @@ def ft_plot_area():
     It prints the area to the console(length * width).
     """
     # Prompt the user for length and width
-    length = float(input("Enter length: "))
-    width = float(input("Enter width: "))
+    length = int(input("Enter length: "))
+    width = int(input("Enter width: "))
 
     # Calculate area
     area = length * width
