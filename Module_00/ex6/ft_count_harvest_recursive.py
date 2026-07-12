@@ -4,12 +4,15 @@ def ft_count_harvest_recursive():
     It prints each day until that number is reached, using recursion.
     """
     days_until_harvest = int(input("Enter the number of days until harvest: "))
-    
+
     def print_days(day):
+        """
+        Nested function to print days recursively.
+        """
         if day > days_until_harvest:
             return
         print(f"Day {day}")
         print_days(day + 1)
-    
+
     print_days(1)
     print("Harvest time!")
