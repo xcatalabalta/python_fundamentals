@@ -21,15 +21,15 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 EXERCISES = {
-    "ft_hello_garden": "ex00",
-    "ft_garden_name": "ex01",
-    "ft_plot_area": "ex02",
-    "ft_harvest_total": "ex03",
-    "ft_plant_age": "ex04",
-    "ft_water_reminder": "ex05",
-    "ft_count_harvest_iterative": "ex06",
-    "ft_count_harvest_recursive": "ex06",
-    "ft_seed_inventory": "ex07",
+    "ft_hello_garden": "ex0",
+    "ft_garden_name": "ex1",
+    "ft_plot_area": "ex2",
+    "ft_harvest_total": "ex3",
+    "ft_plant_age": "ex4",
+    "ft_water_reminder": "ex5",
+    "ft_count_harvest_iterative": "ex6",
+    "ft_count_harvest_recursive": "ex6",
+    "ft_seed_inventory": "ex7",
 }
 
 
