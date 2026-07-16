@@ -14,8 +14,10 @@ def ft_garden_intro():
     print(f"Age: {age} days")
     print("=== End of Program === ")
 
+
 def main():
     ft_garden_intro()
 
-if  __name__ == "__main__":
+
+if __name__ == "__main__":
     main()
