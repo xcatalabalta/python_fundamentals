@@ -60,29 +60,32 @@ class Plant:
             for _ in range(round(days)):
                 self.grow()
 
-    @staticmethod
-    def creation(plant_list: list[dict]) -> list["Plant"]:
-        """
-        Create plants from a list of dict corresponding to plants
-        Defined as static method to be called without an instance of the class.
-        Args:
-        plant_list (list[dict]): a list of dictionaries (typed as list[dict])
-        Invalid and missing values are handled by the Plant class constructor.
-        Returns:
-        _type_: list of Plant objects
-        """
-        plants = []
-        for plant_dict in plant_list:
-            name = plant_dict.get('name')
-            height = plant_dict.get('height')
-            age = plant_dict.get('age')
-            growth = plant_dict.get('growth')
-            plant = Plant(name, height, age, growth)
-            plants.append(plant)
-        return plants
+
+def creation(plant_list: list[dict]) -> list[Plant]:
+    """
+    # @staticmethod
+    # def creation(plant_list: list[dict]) -> list["Plant"]:
+    Create plants from a list of dict corresponding to plants
+    Defined as static method can be called without an instance of the class.
+    Defined as a regular function can be called outside the class.
+    Args:
+    plant_list (list[dict]): a list of dictionaries (typed as list[dict])
+    Invalid and missing values are handled by the Plant class constructor.
+    Returns:
+    _type_: list of Plant objects
+    """
+    plants = []
+    for plant_dict in plant_list:
+        name = plant_dict.get('name')
+        height = plant_dict.get('height')
+        age = plant_dict.get('age')
+        growth = plant_dict.get('growth')
+        plant = Plant(name, height, age, growth)
+        plants.append(plant)
+    return plants
 
 
-plants = Plant.creation([
+plants = creation([
     {'name': 'rose', 'height': 10, 'age': 1},
     {'name': 'Lila', 'age': 9},
     {'name': 'Aloe', 'height': 4.5},
@@ -116,7 +119,7 @@ garden: list[dict] = [
     {'name': 'Sunflower', 'height': 150, 'age': 10, 'growth': 2},
     {'name': 'Kiwi', 'height': 2, 'age': 4, 'growth': 0}
     ]
-new_plants = Plant.creation(garden)
+new_plants = creation(garden)
 print("\n=== New Plants Created from Dictionary ===")
 print("It must be the same as the previous output")
 for plant in new_plants:

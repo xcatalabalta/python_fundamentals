@@ -61,10 +61,10 @@ print(
     f" {type(rosita).__name__}  ")
 print("Printing directly a plant variable: ")
 print(cardo)
-# Remove the following lines to make it mypy compliant:
+# Removed the following lines to make it mypy compliant:
 # It is incorrect to call __init__ directly and print
 # its return value, which is None.
 # Lines are kept for educational purposes to show that __init__ returns None.
-print("Printing the __init__ method: ")
-print(cardo.__init__("cardo", 10, 5))
-cardo.show()
+# print("Printing the __init__ method: ")
+# print(cardo.__init__("cardo", 10, 5))
+# cardo.show()

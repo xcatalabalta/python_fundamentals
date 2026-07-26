@@ -63,27 +63,6 @@ class Plant:
             print(f"{self.name}: Error, aging must be a positive number.")
             print("Update rejected.")
 
-    @staticmethod
-    def creation(plant_list: list[dict]) -> list["Plant"]:
-        """
-        Create plants from a list of dict corresponding to plants
-        Defined as static method to be called without an instance of the class.
-        Args:
-        plant_list (list[dict]): a list of dictionaries (typed as list[dict])
-        Invalid and missing values are handled by the Plant class constructor.
-        Returns:
-        _type_: list of Plant objects
-        """
-        plants = []
-        for plant_dict in plant_list:
-            name = plant_dict.get('name')
-            height = plant_dict.get('height')
-            age = plant_dict.get('age')
-            growth = plant_dict.get('growth')
-            plant = Plant(name, height, age, growth)
-            plants.append(plant)
-        return plants
-
     def set_height(self, new_height):
         """
         Set the height of the plant to a new value.
@@ -156,6 +135,30 @@ class Plant:
         _type_: float
         """
         return self._growth
+
+
+def creation(plant_list: list[dict]) -> list[Plant]:
+    """
+        # @staticmethod
+    # def creation(plant_list: list[dict]) -> list["Plant"]:
+    Create plants from a list of dict corresponding to plants
+    Defined as static method can be called without an instance of the class.
+    Defined as a regular function can be called outside the class.
+    Args:
+    plant_list (list[dict]): a list of dictionaries (typed as list[dict])
+    Invalid and missing values are handled by the Plant class constructor.
+    Returns:
+    _type_: list of Plant objects
+    """
+    plants = []
+    for plant_dict in plant_list:
+        name = plant_dict.get('name')
+        height = plant_dict.get('height')
+        age = plant_dict.get('age')
+        growth = plant_dict.get('growth')
+        plant = Plant(name, height, age, growth)
+        plants.append(plant)
+    return plants
 
 
 valid = 25
