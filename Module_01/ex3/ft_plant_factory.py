@@ -86,7 +86,7 @@ plants = Plant.creation([
     {'name': 'rose', 'height': 10, 'age': 1},
     {'name': 'Lila', 'age': 9},
     {'name': 'Aloe', 'height': 4.5},
-    {'name': 'Tomato', 'height': 5, 'age': 7},
+    {'name': 'boolly', 'height': False, 'age': True},
     {'height': 3, 'age': 2},
     {'name': 'Cactus', 'growth': 0.5},
     {'name': 'Sunflower', 'height': 150, 'age': 10, 'growth': 2},
@@ -100,16 +100,17 @@ for plant in plants:
     plant.show()
     print(f"Growth rate of {plant.name}: {plant.growth}cm per grow() call")
 print(f"\nTotal plants created: {len(plants)}")
-print("\n=== Plant Factory have grown for 3 days ===")
+days = 3
+print(f"\n=== Plant Factory have grown for {days} days ===")
 for plant in plants:
-    plant.age(3)
+    plant.age(days)
     plant.show()
 print("\n=== Testing dictionary input ===")
 garden: list[dict] = [
     {'name': 'rose', 'height': 10, 'age': 1},
     {'name': 'Lila', 'age': 9},
     {'name': 'Aloe', 'height': 4.5},
-    {'name': 'Tomato', 'height': 5, 'age': 7},
+    {'name': 'boolly', 'height': False, 'age': True},
     {'height': 3, 'age': 2},
     {'name': 'Cactus', 'growth': 0.5},
     {'name': 'Sunflower', 'height': 150, 'age': 10, 'growth': 2},
@@ -123,7 +124,7 @@ for plant in new_plants:
     plant.show()
     print(f"Growth rate of {plant.name}: {plant.growth}cm per grow() call")
 print(f"\nTotal plants created: {len(new_plants)}")
-print("\n=== Plant Factory have grown for 3 days ===")
+print(f"\n=== Plant Factory have grown for {days} days ===")
 for plant in new_plants:
-    plant.age(3)
+    plant.age(days)
     plant.show()
