@@ -11,6 +11,7 @@ class Plant:
         name is capitalized,
         height is in centimeters, and age is in days.
         Incldued guards to protect against invalid values.
+        Negative values for height and age are set to 0.
         """
         self.name = name.capitalize() if isinstance(name, str) else "Wtf?"
         self.height = height if isinstance(height, (int, float))\
@@ -58,3 +59,12 @@ rosita.show()
 print(
     "The type of the instance is:"
     f" {type(rosita).__name__}  ")
+print("Printing directly a plant variable: ")
+print(cardo)
+# Remove the following lines to make it mypy compliant:
+# It is incorrect to call __init__ directly and print
+# its return value, which is None.
+# Lines are kept for educational purposes to show that __init__ returns None.
+print("Printing the __init__ method: ")
+print(cardo.__init__("cardo", 10, 5))
+cardo.show()

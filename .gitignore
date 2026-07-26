@@ -10,3 +10,6 @@ __pycache__/
 
 # subject
 *.pdf
+
+# mypy cache
+.mypy_cache/
