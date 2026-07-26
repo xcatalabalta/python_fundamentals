@@ -15,8 +15,8 @@ class Plant:
         """
         self.name = name.capitalize() if isinstance(name, str) else "Wtf?"
         self.height = height if isinstance(height, (int, float))\
-            and height > 0 else 0
-        self.age = age if isinstance(age, (int, float)) and age > 0 else 0
+            and height >= 0 else 0
+        self.age = age if isinstance(age, (int, float)) and age >= 0 else 0
 
     def show(self):
         print(f"{self.name}: {self.height}cm, {self.age} days old")

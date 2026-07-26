@@ -2,7 +2,7 @@
 class Plant:
     """
     A class to represent a plant in the garden.
-    A plant that can have a name, a height and an age.
+    A plant that can have a name, a height, an age and a growth rate.
     New methods have been added to allow for growth and aging of the plant.
     Age attribute has been renamed to age_days
     to avoid conflict with the age method.
@@ -17,16 +17,16 @@ class Plant:
         each time the grow method is called.
         Included guards to protect against invalid values.
         Negative values for height and age are set to 0.
-        Negative and zero values for growth are set to 1.
+        Negative values for growth are set to 1.
         Age is rounded to the nearest whole number to ensure it is an integer.
         """
         self.name = name.capitalize() if isinstance(name, str) else "Wtf?"
         self.height = height if isinstance(height, (int, float))\
-            and height > 0 else 0
+            and height >= 0 else 0
         self.age_days = round(age) if isinstance(age, (int, float))\
-            and age > 0 else 0
+            and age >= 0 else 0
         self.growth = growth if isinstance(growth, (int, float))\
-            and growth > 0 else 1
+            and growth >= 0 else 1
 
     def show(self):
         print(f"{self.name}: {self.height}cm, {self.age_days} days old")
