@@ -9,15 +9,20 @@ class Plant:
     """
     def __init__(self, name="wtf?", height=0, age=0, growth=1):
         """
-        Initialize a new Plant instance.
-        Name is capitalized,
-        height is in centimeters, age is in days,
-        growth is the amount by which the plant grows
-        each time the grow method is called.
+        Initialize a new Plant instance with given values
+        Args:
+            name (str): Name is capitalized,
+            height (int/float): Height is in centimeters,
+            Negative values for height and age are set to 0.
+            age (int/float): Age is in days
+            Negative values for age are set to 0.
+            rounded to the nearest whole number to ensure it is an integer.
+            growth (int/float): Growth is the amount by which the plant grows
+            each time the grow method is called.
+            Negative values for growth are set to 1.
+        Returns:
+            _type_: None
         Included guards to protect against invalid values.
-        Negative values for height and age are set to 0.
-        Negative values for growth are set to 1.
-        Age is rounded to the nearest whole number to ensure it is an integer.
         """
         self.name = name.capitalize() if isinstance(name, str) else "Wtf?"
         self._height = height if isinstance(height, (int, float))\
@@ -31,6 +36,8 @@ class Plant:
         """
         Display the plant's name, height, and age in a formatted string.
         The age is displayed in singular or plural form based on its value.
+        Returns:
+            _type_: None
         """
         print(f"{self.name}: {self._height}cm, {self._age_days} "
               f"{'day' if self._age_days == 1 else 'days'} old")
@@ -40,6 +47,11 @@ class Plant:
         Increase the height of the plant by the specified growth amount.
         The growth amount must be a positive number.
         Otherwise, the height remains unchanged.
+        If growth is None, the plant grows by its default growth rate.
+        Args:
+            growth (int/float): The amount by which the plant should grow.
+        Returns:
+            _type_: None
         """
         if isinstance(growth, (int, float)) and growth > 0:
             self._height += growth
@@ -54,6 +66,10 @@ class Plant:
         Otherwise, the age remains unchanged.
         Age is rounded to the nearest whole number to ensure it is an integer.
         Age calls the grow method.
+        Args:
+            days (int/float): Number of days to age the plant.
+        Returns:
+            _type_: None
         """
         if isinstance(days, (int, float)) and days > 0:
             self._age_days += round(days)
@@ -68,6 +84,10 @@ class Plant:
         Set the height of the plant to a new value.
         The new height must be a positive number.
         Otherwise, the height remains unchanged.
+        Args:
+            new_height (int/float): The new height value.
+        Returns:
+            _type_: None
         """
         if isinstance(new_height, (int, float)) and new_height >= 0:
             self._height = new_height
@@ -85,6 +105,10 @@ class Plant:
         The new age must be a positive number.
         Otherwise, the age remains unchanged.
         Age is rounded to the nearest whole number to ensure it is an integer.
+        Args:
+            new_age (int/float): The new age value.
+        Returns:
+            _type_: None
         """
         if isinstance(new_age, (int, float)) and new_age >= 0:
             self._age_days = round(new_age)
@@ -101,6 +125,10 @@ class Plant:
         Set the growth rate of the plant to a new value.
         The new growth rate must be a positive number.
         Otherwise, the growth rate remains unchanged.
+        Args:
+            new_growth (int/float): The new growth rate value.
+        Returns:
+            _type_: None
         """
         if isinstance(new_growth, (int, float)) and new_growth >= 0:
             self._growth = new_growth
@@ -116,7 +144,7 @@ class Plant:
         """
         Get the current height of the plant.
         Returns:
-        _type_: float
+            _type_: float
         """
         return self._height
 
@@ -124,7 +152,7 @@ class Plant:
         """
         Get the current age of the plant.
         Returns:
-        _type_: int
+            _type_: int
         """
         return self._age_days
 
@@ -132,23 +160,24 @@ class Plant:
         """
         Get the current growth rate of the plant.
         Returns:
-        _type_: float
+            _type_: float
         """
         return self._growth
 
 
 def creation(plant_list: list[dict]) -> list[Plant]:
     """
-        # @staticmethod
-    # def creation(plant_list: list[dict]) -> list["Plant"]:
     Create plants from a list of dict corresponding to plants
     Defined as static method can be called without an instance of the class.
     Defined as a regular function can be called outside the class.
     Args:
-    plant_list (list[dict]): a list of dictionaries (typed as list[dict])
-    Invalid and missing values are handled by the Plant class constructor.
+        plant_list (list[dict]): a list of dictionaries (typed as list[dict])
+        Invalid and missing values are handled by the Plant class constructor.
     Returns:
-    _type_: list of Plant objects
+        _type_: list of Plant objects
+    Alternatively, this function can be defined as a static method.
+    # @staticmethod
+    # def creation(plant_list: list[dict]) -> list["Plant"]:
     """
     plants = []
     for plant_dict in plant_list:
