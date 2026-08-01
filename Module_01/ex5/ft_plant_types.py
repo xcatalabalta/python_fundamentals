@@ -251,9 +251,224 @@ class Flower(Plant):
         """
         super().show()
         print(f" Color: {self._color}")
-        print(f" {self.name} "
-              f"{'is blooming beautifully!' if self._bloomed
-                 else 'has not bloomed yet.'}")
+        status = ("is blooming beautifully!" if self._bloomed
+                  else " has not bloomed yet")
+        print(f" {self.name} {status}")
+
+
+class Tree(Plant):
+    """
+    A class to represent a tree in the garden.
+    Inherits from the Plant class.
+    Additional attributes: trunk_diameter.
+    Additional ability: produce_shade()
+    """
+    def __init__(self, name="tree", height=0, age=0, growth=10):
+        """
+        Initialize a Tree instance.
+        Inherits from the Plant class
+        Leaves trunk_diameter attribute to be added later.
+        Args:
+            name (str): The name of the tree.
+            height (int/float): The height of the tree.
+            age (int/float): The age of the tree.
+            growth (int/float): The growth rate of the tree.
+        Returns:
+            _type_: None
+        """
+        super().__init__(name, height, age, growth)
+
+    def set_trunk_diameter(self, new_diameter):
+        """
+        Set the trunk diameter of the tree to a new value.
+        The new diameter must be a positive number.
+        Otherwise, the diameter remains unchanged.
+        Args:
+            new_diameter (int/float): The new trunk diameter value.
+        Returns:
+            _type_: None
+        """
+        if isinstance(new_diameter, (int, float)) and new_diameter >= 0:
+            self._trunk_diameter = new_diameter
+            print(f"Trunk diameter updated: {self._trunk_diameter}cm")
+        elif isinstance(new_diameter, (int, float)) and new_diameter < 0:
+            print(f"{self.name}: Error, trunk diameter cannot be negative.")
+            print("Update rejected.")
+        else:
+            print(f"{self.name}: Error, trunk diameter must be a number.")
+            print("Update rejected.")
+
+    def get_trunk_diameter(self):
+        """
+        Get the current trunk diameter of the tree.
+        Returns:
+            _type_: float
+        """
+        try:
+            return self._trunk_diameter
+        except AttributeError:
+            return None
+
+    def produce_shade(self):
+        """
+        Simulate the tree producing shade.
+        Returns:
+            _type_: None
+        """
+        try:
+            diameter = self._trunk_diameter
+        except AttributeError:
+            print(f"{self.name}: No diameter, no shade.")
+            return
+        if self._height > 0 and diameter > 0:
+            print(f"Tree {self.name} now produces a shade of "
+                  f"{self._height}cm long and {diameter}cm wide.")
+        else:
+            print(f"Tree {self.name} is too short to produce shade.")
+
+    def grow(self, growth=None):
+        """
+        Increase the height of the tree by the specified growth amount.
+        The growth amount must be a positive number.
+        Otherwise, the height remains unchanged.
+        If growth is None, the tree grows by its default growth rate.
+        Args:
+            growth (int/float): The amount by which the tree should grow.
+        Returns:
+            _type_: None
+        """
+        super().grow(growth)
+        try:
+            diameter = self._trunk_diameter
+        except AttributeError:
+            diameter = 0
+        self._trunk_diameter = diameter
+        if isinstance(growth, (int, float)) and growth > 0:
+            self._trunk_diameter += growth / 10
+        else:
+            self._trunk_diameter += self._growth / 10
+
+    def show(self):
+        """
+        Display the tree's attributes in a formatted string.
+        Use the show method from the Plant class
+        Add trunk diameter.
+        Returns:
+            _type_: None
+        """
+        super().show()
+        diameter = self.get_trunk_diameter()
+        if diameter is not None:
+            print(f" Trunk diameter: {diameter}cm")
+        else:
+            print(" Trunk diameter: Not set")
+
+
+class Vegetable(Plant):
+    """
+    A class to represent a vegetable in the garden.
+    Inherits from the Plant class.
+    Additional attributes:
+    - harvest_season
+    - nutritional_value.
+    """
+    def __init__(self, name="vegetable", height=0, age=0, growth=1):
+        """
+        Initialize a Vegetable instance.
+        Inherits from the Plant class
+        Initializes harvest_season and nutritional_value attributes.
+        Args:
+            name (str): The name of the vegetable.
+            height (int/float): The height of the vegetable.
+            age (int/float): The age of the vegetable.
+            growth (int/float): The growth rate of the vegetable.
+        Returns:
+            _type_: None
+        """
+        super().__init__(name, height, age, growth)
+        self._harvest_season = None
+        self._nutritional_value = 0
+
+    def set_harvest_season(self, season):
+        """
+        Set the harvest season of the vegetable.
+        The season must be a string.
+        Otherwise, the harvest season remains unchanged.
+        Args:
+            season (str): The new harvest season value.
+        Returns:
+            _type_: None
+        """
+        seasons = ['summer', 'winter', 'autumn', 'spring']
+        if isinstance(season, str) and season in seasons:
+            self._harvest_season = season
+        else:
+            print(f"{self.name}: Error. Please provide a valid season:")
+            # commented out because it was not authorized by the instructions.
+            # print(f"Valid seasons are: {', '.join(seasons)}.")
+            print(seasons)
+
+    def set_nutritional_value(self, value):
+        """
+        Set the nutritional value of the vegetable.
+        The value must be a positive number.
+        Otherwise, the nutritional value remains unchanged.
+        Args:
+            value (int/float): The new nutritional value.
+        Returns:
+            _type_: None
+        """
+        if isinstance(value, (int, float)) and value > 0:
+            self._nutritional_value = value
+        else:
+            print(f"{self.name}: Error. Please provide a positive number.")
+
+    def get_harvest_season(self):
+        """
+        Get the current harvest season of the vegetable.
+        Returns:
+            _type_: str
+        """
+        return self._harvest_season
+
+    def get_nutritional_value(self):
+        """
+        Get the current nutritional value of the vegetable.
+        Returns:
+            _type_: float
+        """
+        return self._nutritional_value
+
+    def grow(self, growth=None):
+        """
+        Increase the height of the vegetable by the specified growth amount.
+        The growth amount must be a positive number.
+        Otherwise, the height remains unchanged.
+        If growth is None, the vegetable grows by its default growth rate.
+        Increase the nutritional value by 10% of the growth amount.
+        If growth is None, the value increases by 10% of the default rate.
+        Args:
+            growth (int/float): The amount by which the vegetable should grow.
+        Returns:
+            _type_: None
+        """
+        super().grow(growth)
+        if isinstance(growth, (int, float)) and growth > 0:
+            self._nutritional_value += growth * 0.1
+        else:
+            self._nutritional_value += self._growth * 0.1
+
+    def show(self):
+        """
+        Display the vegetable's attributes in a formatted string.
+        Use the show method from the Plant class
+        Add harvest season and nutritional value.
+        Returns:
+            _type_: None
+        """
+        super().show()
+        print(f" Harvest season: {self.get_harvest_season()}")
+        print(f" Nutritional value: {self.get_nutritional_value()}")
 
 
 print("=== Garden Plant Types ===  ")
@@ -272,3 +487,48 @@ sunflower.set_age(15)
 sunflower.grow(3)
 sunflower.set_bloomed(True)
 sunflower.show()
+print("=== Tree")
+oak = Tree("Oak", 100, 50, 5)
+oak.show()
+# Testing the function getattr to access the private attribute _trunk_diameter
+# Un/comment the following lines
+# (the function is not authorized by the instructions.)
+# print(f"Trunk diameter of {oak.name}: "
+#       f"{getattr(oak, '_trunk_diameter', 'Not set')}")
+# oak.set_trunk_diameter(30)
+# print(f"Trunk diameter of {oak.name}: "
+#       f"{getattr(oak, '_trunk_diameter', 'Not set')}")
+print("Tree Shade Production Test  ===>")
+oak.produce_shade()
+oak.set_trunk_diameter(30)
+oak.produce_shade()
+oak.show()
+oak.age(10)
+oak.show()
+oak.produce_shade()
+print("Testing invalid inputs  ===>")
+pine = Tree("Pine", -50, -20, -3)
+pine.show()
+pine.set_trunk_diameter(-10)
+pine.set_trunk_diameter("large")
+pine.age(-5)
+print("Testing valid inputs after invalid ones  ===>")
+pine.age(150)
+pine.show()
+pine.produce_shade()
+mutard = Tree("Mutard")
+mutard.show()
+mutard.age(20)
+mutard.show()
+mutard.produce_shade()
+print("=== Vegetable")
+tomato = Vegetable("Tomato", 30, 20, 3)
+tomato.show()
+tomato.set_harvest_season("summer")
+tomato.grow(5)
+tomato.show()
+tomato.set_nutritional_value(5.5)
+tomato.set_harvest_season("summmmmer")
+tomato.show()
+tomato.age(10)
+tomato.show()
