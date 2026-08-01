@@ -165,59 +165,110 @@ class Plant:
         return self._growth
 
 
-def creation(plant_list: list[dict]) -> list[Plant]:
+class Flower(Plant):
     """
-    Create plants from a list of dict corresponding to plants
-    Defined as a regular function can be called outside the class.
-    Args:
-        plant_list (list[dict]): a list of dictionaries (typed as list[dict])
-        Invalid and missing values are handled by the Plant class constructor.
-    Returns:
-        _type_: list of Plant objects
-    Alternatively, this function can be defined as a static method.
-    It can be called without an instance of the class.
-    # @staticmethod
-    # def creation(plant_list: list[dict]) -> list["Plant"]:
+    A class to represent a flower in the garden.
+    Inherits from the Plant class.
+    Additional attributes: color, bloomed.
+    Bloomed is a boolean indicating whether the flower has bloomed or not.
+    Bloomed is initialized to False by default.
     """
-    plants = []
-    for plant_dict in plant_list:
-        name = plant_dict.get('name')
-        height = plant_dict.get('height')
-        age = plant_dict.get('age')
-        growth = plant_dict.get('growth')
-        plant = Plant(name, height, age, growth)
-        plants.append(plant)
-    return plants
+    def __init__(self, name="flower", height=0, age=0, growth=1, color="??"):
+        """
+        Initialize a Flower instance.
+        Inherits from the Plant class and adds a color attribute.
+        Initializes bloomed status to False
+        Args:
+            name (str): The name of the flower.
+            height (int/float): The height of the flower.
+            age (int/float): The age of the flower.
+            growth (int/float): The growth rate of the flower.
+            color (str): The color of the flower.
+        Returns:
+            _type_: None
+        """
+        super().__init__(name, height, age, growth)
+        self._color = color if isinstance(color, str) else "??"
+        self._bloomed = False
+
+    def set_color(self, new_color):
+        """
+        Set the color of the flower to a new value.
+        The new color must be a string.
+        Otherwise, the color remains unchanged.
+        Args:
+            new_color (str): The new color value.
+        Returns:
+            _type_: None
+        """
+        if isinstance(new_color, str):
+            self._color = new_color
+            print(f"Color updated: {self._color}")
+        else:
+            print(f"{self.name}: Error, color must be a string.")
+            print("Update rejected.")
+
+    def set_bloomed(self, bloomed):
+        """
+        Set the bloomed status of the flower.
+        The bloomed status must be a boolean value.
+        Otherwise, the bloomed status remains unchanged.
+        Args:
+            bloomed (bool): The new bloomed status.
+        Returns:
+            _type_: None
+        """
+        if isinstance(bloomed, bool):
+            self._bloomed = bloomed
+            print(f"Bloomed status updated: {self._bloomed}")
+        else:
+            print(f"{self.name}: Error, bloomed status must be a boolean.")
+            print("Update rejected.")
+
+    def get_color(self):
+        """
+        Get the current color of the flower.
+        Returns:
+            _type_: str
+        """
+        return self._color
+
+    def bloom(self):
+        """
+        Set the flower's bloomed status to True.
+        Returns:
+            _type_: None
+        """
+        self._bloomed = True
+
+    def show(self):
+        """
+        Display the flower's attributes in a formatted string.
+        Use the show method from the Plant class
+        Add color and bloomed status.
+        Returns:
+            _type_: None
+        """
+        super().show()
+        print(f" Color: {self._color}")
+        print(f" {self.name} "
+              f"{'is blooming beautifully!' if self._bloomed
+                 else 'has not bloomed yet.'}")
 
 
-valid = 25
-invalid = -5
-thing = "some"
-print("=== Garden Security System ===")
-rose = Plant("Rose", 15.0, 10, 2.0)
-print("Plant created: ", end='')
+print("=== Garden Plant Types ===  ")
+print("=== Flower")
+rose = Flower("Rose", 15.0, 10, 2.0, "red")
 rose.show()
-print(f"Growth rate of {rose.name}: {rose.get_growth()}cm per grow() call")
-rose.set_height(valid)
-rose.set_age(valid + 5)
-print("Current state: ", end='')
+rose.age(5)
+rose.set_color("pink")
+rose.bloom()
 rose.show()
-print("=== Invalid Updates ===")
-rose.set_height(invalid)
-rose.set_age(invalid)
-rose.set_height(thing)
-rose.set_age(thing)
-print("Current state: ", end='')
-rose.show()
-# Un/comment the following lines to test getters:
-# print(f"Height: {rose._height()}cm")
-# print(f"Age: {rose._age_days()} days")
-# print(f"Height: {rose.get_height()}cm")
-# print(f"Age: {rose.get_age()} days")
-rose.age(valid)
-print(f"Current state after aging {valid} days: ", end='')
-rose.show()
-print(f"Trying to get back to the original age by aging -{valid} days:")
-rose.age(-valid)
-print(f"Current state after aging -{valid} days: ", end='')
-rose.show()
+sunflower = Flower("SUNFLOWER")
+sunflower.show()
+sunflower.set_color("yellow")
+sunflower.set_height(30)
+sunflower.set_age(15)
+sunflower.grow(3)
+sunflower.set_bloomed(True)
+sunflower.show()
