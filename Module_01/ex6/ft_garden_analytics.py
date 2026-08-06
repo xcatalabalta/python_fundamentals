@@ -3,8 +3,9 @@ class Plant:
     """
     A class to represent a plant in the garden.
     A plant that can have a name, a height, an age and a growth rate.
-    Methods: growth and aging.
-    New method: create from a dictionary.
+    Methods: growth and aging, with setters and getters.
+    static method: more_than_a_year_old.
+    class method: anonymous_plant.
     All flake8 and mypy compliant.
     """
     def __init__(self, name="wtf?", height=0, age=0, growth=1):
@@ -175,6 +176,15 @@ class Plant:
         """
         return days > 365
 
+    @classmethod
+    def anonymous_plant(cls):
+        """
+        Create an anonymous plant instance.
+        Returns:
+            _type_: Plant
+        """
+        return cls()
+
 
 class Flower(Plant):
     """
@@ -263,8 +273,56 @@ class Flower(Plant):
         super().show()
         print(f" Color: {self._color}")
         status = ("is blooming beautifully!" if self._bloomed
-                  else " has not bloomed yet")
+                  else "has not bloomed yet")
         print(f" {self.name} {status}")
+
+
+class Seed(Flower):
+    """
+    class that inherits from Flower, and holds the number of seeds once
+    the flower has bloomed
+    """
+    def __init__(self, name="seed", height=0, age=0, growth=1, color="??",
+                 seeds=0):
+        """
+        Initialize a Seed instance.
+        Inherits from the Flower class and adds a seeds attribute.
+        Args:
+            name (str): The name of the seed.
+            height (int/float): The height of the seed.
+            age (int/float): The age of the seed.
+            growth (int/float): The growth rate of the seed.
+            color (str): The color of the seed.
+            seeds (int): The number of seeds produced by the flower.
+        Returns:
+            _type_: None
+        """
+        super().__init__(name, height, age, growth, color)
+        self._seeds = seeds
+
+    def get_seeds(self):
+        return self._seeds
+
+    def set_seeds(self, new_seeds):
+        if isinstance(new_seeds, int) and new_seeds >= 0 and self._bloomed:
+            self._seeds = new_seeds
+            print(f"Number of seeds updated: {self._seeds}")
+        else:
+            if not self._bloomed:
+                print(f"{self.name}: Error, flower has not bloomed yet.")
+            else:
+                print("Error: Number of seeds must be a non-negative integer.")
+            print("Update rejected.")
+
+    def show(self):
+        super().show()
+        if not self._bloomed:
+            print(" Number of seeds: 0 (flower has not bloomed yet)")
+        else:
+            try:
+                print(f" Number of seeds: {self._seeds}")
+            except AttributeError:
+                print(" Number of seeds: 0")
 
 
 class Tree(Plant):
@@ -505,3 +563,27 @@ for x in range(30, 400, 90):
     for plant in garden_plants:
         plant.age(30)
         plant.show()
+print("=== Check anonymous plants ===")
+anonymous_plant = Plant.anonymous_plant()
+anonymous_plant.show()
+anonymous_flower = Flower.anonymous_plant()
+anonymous_flower.show()
+anonymous_tree = Tree.anonymous_plant()
+anonymous_tree.show()
+anonymous_vegetable = Vegetable.anonymous_plant()
+anonymous_vegetable.show()
+print("=== Aging anonymous plants 365 days ===")
+anonymous_plant.age(365)
+anonymous_flower.age(365)
+anonymous_tree.age(365)
+anonymous_vegetable.age(365)
+anonymous_plant.show()
+anonymous_flower.show()
+anonymous_tree.show()
+anonymous_vegetable.show()
+print("=== Check Seed class ===")
+seed = Seed("Sunflower", 20, 15, 2, "yellow")
+seed.show()
+seed.bloom()
+seed.set_seeds(100)
+seed.show()
